@@ -1,7 +1,12 @@
 <resources>
-    <string name="app_name">Gruppenmeister2</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Gruppenmeister</string>
+    <string name="home_title">Home</string>
     <string name="todos_title">Todos</string>
-    <string name="home_title">Startseite</string>
     <string name="group_title">Gruppen</string>
+    <string name="benefits">Benefits:</string>
+    <string name="benefit1">In unterschied- lichen Gruppen arbeiten.</string>
+    <string name="benefit2">Aufgaben zu- weisen und abhaken.</string>
+    <string name="release">Coming soon:</string>
+    <string name="release1">Kalender füllen und synchronisieren.</string>
+    <string name="release2">Dateien ab- legen und aus- tauschen.</string>
 </resources>
