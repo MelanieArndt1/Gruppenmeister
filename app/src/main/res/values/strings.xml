@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Gruppenmeister2</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todos_title">Todos</string>
+    <string name="home_title">Startseite</string>
+    <string name="group_title">Gruppen</string>
 </resources>
