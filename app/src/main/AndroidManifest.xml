@@ -12,8 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gruppenmeister"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/todo.xml" />
+
         <activity
-            android:name="com.example.gruppenmeister.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
