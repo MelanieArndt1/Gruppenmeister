@@ -19,12 +19,8 @@ class TodoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_todo)
-        observeAufgabe()
         testDaten()
 
-        val name = findViewById<TextView>(R.id.Name)
-        val beschreibung = findViewById<TextView>(R.id.Beschreibung)
-        val prio = findViewById<TextView>(R.id.Prio)
 
         val Aufgabe: Aufgabe = GruppenmeisterDatabase.getAufgabe()
 
@@ -52,13 +48,6 @@ class TodoActivity : AppCompatActivity() {
 
 
 
-
-
-    private fun observeAufgabe() {
-        lifecycleScope.launch {
-             GruppenmeisterDatabase.getAufgabe()
-            }
-    }
 
     private fun testDaten() {
         lifecycleScope.launch {

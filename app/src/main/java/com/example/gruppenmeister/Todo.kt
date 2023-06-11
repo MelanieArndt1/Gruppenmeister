@@ -46,7 +46,7 @@ class Todo : Fragment() {
         val namemessage = namebundle!!.getString("name")
 
         val beschreibungbundle = arguments
-        val beschreibungmessage = beschreibungbundle!!.getString("beschreibung")
+       val beschreibungmessage = beschreibungbundle!!.getString("beschreibung")
 
         val priobundle = arguments
         val priomessage = priobundle!!.getInt("prio")
