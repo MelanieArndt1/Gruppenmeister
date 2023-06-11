@@ -1,14 +1,9 @@
 package com.example.gruppenmeister
 
 import android.os.Bundle
-import android.widget.CalendarView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 
 class TodoActivity : AppCompatActivity() {
@@ -36,12 +31,12 @@ class TodoActivity : AppCompatActivity() {
         val bundle = Bundle()
         bundle.putString("beschreibung", Aufgabe.beschreibung)
         mFragment.arguments = bundle
-        mFragmentTransaction.add(R.id.Name, mFragment)
+        mFragmentTransaction.add(R.id.Beschreibung, mFragment)
 
         val undle = Bundle()
         undle.putInt("prio", Aufgabe.prio)
         mFragment.arguments = undle
-        mFragmentTransaction.add(R.id.Name, mFragment)
+        mFragmentTransaction.add(R.id.Prio, mFragment)
 
         mFragmentTransaction.commit()
     }
