@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> replaceFragment(Home())
                 R.id.todo -> replaceFragment(Todo())
                 R.id.groups -> replaceFragment(Groups())
+                R.id.add -> replaceFragment(Add())
 
                 else ->{
 
