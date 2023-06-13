@@ -23,7 +23,6 @@ class AddActivity: AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.id.list, list)
 
         Log.i("", adapter.toString())
-        listView.adapter = adapter
 
         button.setOnClickListener {
             if(editText.text.isNotEmpty()) {
