@@ -1,7 +1,11 @@
 package com.example.gruppenmeister
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.gruppenmeister.databinding.ActivityMainBinding
 
@@ -15,14 +19,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(Home())
 
+
         binding.bottomNavigationView.setOnItemSelectedListener {
 
+            val changePage = Intent(this, AddActivity::class.java)
             when(it.itemId){
-
                 R.id.home -> replaceFragment(Home())
                 R.id.todo -> replaceFragment(Todo())
                 R.id.groups -> replaceFragment(Groups())
-                R.id.add -> replaceFragment(Add())
+                R.id.add -> startActivity(changePage)
 
                 else ->{
 
