@@ -7,20 +7,25 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class AddActivity: AppCompatActivity() {
-    @SuppressLint("ResourceType")
+
+    val list = mutableListOf<String>("test")
+
+    @SuppressLint("ResourceType", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_add)
 
-        val list = mutableListOf<String>("test")
-
         val button = findViewById<Button>(R.id.button)
-        val listView = findViewById<ListView>(R.id.list)
         val editText = findViewById<EditText>(R.id.editText)
-        val adapter = ArrayAdapter(this, R.id.list, list)
+        val view1 = findViewById<TextView>(R.id.view1)
+        val view2 = findViewById<TextView>(R.id.view2)
+        val view3 = findViewById<TextView>(R.id.view3)
+        val view4 = findViewById<TextView>(R.id.view4)
+        val adapter = ArrayAdapter(this, R.layout.fragment_add, list)
 
         Log.i("", adapter.toString())
 
@@ -29,6 +34,20 @@ class AddActivity: AppCompatActivity() {
                 list.add(editText.text.toString())
                 Log.i("", list.toString())
                 editText.setText("")
+
+                if(list.count() == 1){
+                    view1.text = list[0]
+                }
+
+                if(list.count() == 2){
+                    view2.text = list[1]}
+
+                if(list.count() == 3){
+                    view3.text = list[2]}
+
+                if(list.count() == 4){
+                    view4.text = list[3]
+                }
             }
         }
 
