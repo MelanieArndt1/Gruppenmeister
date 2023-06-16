@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".NewGroupSheet"
+    android:background="#121212"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Neue Gruppe"
+        android:textColor="?colorOnPrimary"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        style="@style/TextAppearance.AppCompat.Title"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        app:boxStrokeColor="@color/black"
+        app:boxBackgroundColor="@color/purple_200"
+        app:hintTextColor="#DDDDDD">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/groupName"
+            android:height="50dp"
+            android:hint="Gruppen Name"
+            android:textColor="@color/white"
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+<com.google.android.material.button.MaterialButton
+    android:id="@+id/gruppeSpeichernButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="20dp"
+    android:backgroundTint="@color/purple_200"
+    android:textColor="@color/white"
+    android:text="Speichern"/>
+</LinearLayout>
