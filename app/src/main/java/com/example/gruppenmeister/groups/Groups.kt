@@ -1,22 +1,27 @@
-package com.example.gruppenmeister
+package com.example.gruppenmeister.groups
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gruppenmeister.GroupMasterApplication
 import com.example.gruppenmeister.databinding.FragmentGroupsBinding
 
 class Groups : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentGroupsBinding
-    private lateinit var groupViewModel: GroupViewModel
+    private val groupViewModel: GroupViewModel by viewModels {
+        val activity= requireActivity()
+        GroupItemModelFactory((activity?.application as GroupMasterApplication).repository)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val activity= requireActivity()
-        groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
+//        val activity= requireActivity()
+//        groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
         binding.newGroupButton.setOnClickListener{
                 val newGroupSheet = NewGroupSheet(null)
             newGroupSheet.show(childFragmentManager,"newGroupTag")

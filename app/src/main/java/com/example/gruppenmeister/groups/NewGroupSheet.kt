@@ -1,31 +1,37 @@
-package com.example.gruppenmeister
+package com.example.gruppenmeister.groups
 
 import android.os.Bundle
 import android.text.Editable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.example.gruppenmeister.GroupMasterApplication
 import com.example.gruppenmeister.databinding.FragmentNewGroupSheetBinding
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class NewGroupSheet(var gruppe: Gruppe? ) : BottomSheetDialogFragment() {
+class NewGroupSheet(var groupItem: GroupItem? ) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentNewGroupSheetBinding
-    private lateinit var groupViewModel: GroupViewModel
+    private val groupViewModel: GroupViewModel by viewModels {
+        val activity= requireActivity()
+        GroupItemModelFactory((activity?.application as GroupMasterApplication).repository)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val activity= requireActivity()
+        //val activity= requireActivity()
 
-        if(gruppe != null) {
+        if(groupItem != null) {
             binding.title.text = "Gruppe bearbeiten"
             val editable = Editable.Factory.getInstance()
-            binding.groupName.text = editable.newEditable(gruppe!!.groupName)
+            binding.groupName.text = editable.newEditable(groupItem!!.groupName)
+        }
+        else {
+            binding.title.text = "Neue Gruppe"
         }
 
-        groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
+       // groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
         binding.gruppeSpeichernButton.setOnClickListener{
             saveAction()
         }
@@ -41,13 +47,14 @@ class NewGroupSheet(var gruppe: Gruppe? ) : BottomSheetDialogFragment() {
 
     private fun saveAction() {
         val groupName = binding.groupName.text.toString()
-        if(gruppe == null)
+        if(groupItem == null)
         {
-            val newGruppe = Gruppe( groupName)
-            groupViewModel.addGruppe(newGruppe)
+            val newGroupItem = GroupItem( groupName)
+            groupViewModel.addGroup(newGroupItem)
         }
         else {
-            groupViewModel.updateGruppe(gruppe!!.gruppenid, groupName)
+            groupItem!!.groupName = groupName
+            groupViewModel.updateGruppe(groupItem!!)
         }
         binding.groupName.setText("")
         dismiss()

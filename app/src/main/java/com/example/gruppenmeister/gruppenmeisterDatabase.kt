@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.*
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.gruppenmeister.groups.GroupItem
+import com.example.gruppenmeister.groups.GroupDao
 
 
 @Database(
-    entities = [Gruppe::class, Aufgabe::class],
+    entities = [GroupItem::class, Aufgabe::class],
 //    autoMigrations = [
 //        AutoMigration (from = 1, to = 2)
 //    ],
@@ -18,23 +20,23 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 abstract class gruppenmeisterDatabase : RoomDatabase() {
 
     abstract fun AufgabeDao(): AufgabeDao
-    abstract fun GruppenDao():GruppenDao
+    abstract fun GruppenDao(): GroupDao
 
     companion object {
         @Volatile
         private var INSTANCE: gruppenmeisterDatabase? = null
 
         fun getDatabase(context: Context): gruppenmeisterDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
-            if (INSTANCE == null) {
-                synchronized(this) {
-                    // Pass the database to the INSTANCE
-                    INSTANCE = buildDatabase(context)
-                }
+            return INSTANCE ?: synchronized(this)
+            {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    gruppenmeisterDatabase::class.java,
+                    "groupmaster_database"
+                ).build()
+                INSTANCE = instance
+                instance
             }
-            // Return database.
-            return INSTANCE!!
         }
 
         private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
@@ -42,16 +44,6 @@ abstract class gruppenmeisterDatabase : RoomDatabase() {
                 // The following query will add a new column called lastUpdate to the notes database
                 database.execSQL("ALTER TABLE Aufgabe ADD COLUMN lastUpdate INTEGER NOT NULL DEFAULT 0")
             }
-        }
-
-        private fun buildDatabase(context: Context): gruppenmeisterDatabase {
-            return Room.databaseBuilder(
-                context.applicationContext,
-                gruppenmeisterDatabase::class.java,
-                "notes_database"
-            )
-                //.addMigrations(MIGRATION_1_2)
-                .build()
         }
     }
 }

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "00dcfd5576b7fd0d22be09b28d9f3d01",
+    "identityHash": "332508af744b30fab962dc2daa206e52",
     "entities": [
       {
         "tableName": "Gruppe",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `gruppenid` BLOB NOT NULL, PRIMARY KEY(`gruppenid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `gruppenid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
             "fieldPath": "groupName",
@@ -17,12 +17,12 @@
           {
             "fieldPath": "gruppenid",
             "columnName": "gruppenid",
-            "affinity": "BLOB",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
         "primaryKey": {
-          "autoGenerate": false,
+          "autoGenerate": true,
           "columnNames": [
             "gruppenid"
           ]
@@ -90,7 +90,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '00dcfd5576b7fd0d22be09b28d9f3d01')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '332508af744b30fab962dc2daa206e52')"
     ]
   }
 }

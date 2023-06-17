@@ -1,18 +1,17 @@
-package com.example.gruppenmeister
+package com.example.gruppenmeister.groups
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.UUID
 
 
 @Entity(tableName = "Gruppe")
-data class Gruppe(
+data class GroupItem(
     @ColumnInfo(name= "name")
     var groupName: String,
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name= "gruppenid")
-    var gruppenid: UUID = UUID.randomUUID(),
+    var gruppenid: Int = 0
 ) {
 
 }

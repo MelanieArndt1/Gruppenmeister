@@ -1,4 +1,4 @@
-package com.example.gruppenmeister
+package com.example.gruppenmeister.groups
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gruppenmeister.databinding.GroupItemCellBinding
 
 class GroupAdapter(
-    private val groupItems: List<Gruppe>
+    private val groupItems: List<GroupItem>
 ) : RecyclerView.Adapter<GroupViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
         val from = LayoutInflater.from(parent.context)

@@ -1,4 +1,4 @@
-package com.example.gruppenmeister
+package com.example.gruppenmeister.groups
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +9,7 @@ class GroupViewHolder(
     private val binding: GroupItemCellBinding
 ): RecyclerView.ViewHolder(binding.root) {
 
-    fun bindGroupItem(groupItem: Gruppe){
+    fun bindGroupItem(groupItem: GroupItem){
         binding.groupName.text = groupItem.groupName
     }
 }

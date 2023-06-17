@@ -3,11 +3,9 @@ package com.example.gruppenmeister
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.gruppenmeister.databinding.ActivityMainBinding
+import com.example.gruppenmeister.groups.Groups
 
 class MainActivity : AppCompatActivity() {
 
