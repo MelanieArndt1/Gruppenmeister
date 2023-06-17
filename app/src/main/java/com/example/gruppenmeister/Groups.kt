@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gruppenmeister.databinding.FragmentGroupsBinding
 
 class Groups : Fragment() {
@@ -17,13 +18,10 @@ class Groups : Fragment() {
         val activity= requireActivity()
         groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
         binding.newGroupButton.setOnClickListener{
-                val newGroupSheet = NewGroupSheet()
+                val newGroupSheet = NewGroupSheet(null)
             newGroupSheet.show(childFragmentManager,"newGroupTag")
             }
-        groupViewModel.groupName.observe(viewLifecycleOwner){
-            binding.groupName.text = String.format("Gruppen Name: %s", it)
-        }
-
+        setRecyclerView()
     }
 
     override fun onCreateView(
@@ -32,5 +30,15 @@ class Groups : Fragment() {
     ): View? {
         binding = FragmentGroupsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    fun setRecyclerView(){
+        val activity= requireActivity()
+        groupViewModel.gruppen.observe(viewLifecycleOwner){
+        binding.groupListRecyclerView.apply{
+            layoutManager = LinearLayoutManager(activity.applicationContext)
+            adapter = GroupAdapter(it)
+        }
+        }
     }
 }

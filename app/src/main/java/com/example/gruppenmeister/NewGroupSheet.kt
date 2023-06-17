@@ -1,6 +1,7 @@
 package com.example.gruppenmeister
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +11,20 @@ import com.example.gruppenmeister.databinding.FragmentNewGroupSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class NewGroupSheet : BottomSheetDialogFragment() {
+class NewGroupSheet(var gruppe: Gruppe? ) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentNewGroupSheetBinding
     private lateinit var groupViewModel: GroupViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity= requireActivity()
+
+        if(gruppe != null) {
+            binding.title.text = "Gruppe bearbeiten"
+            val editable = Editable.Factory.getInstance()
+            binding.groupName.text = editable.newEditable(gruppe!!.groupName)
+        }
+
         groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
         binding.gruppeSpeichernButton.setOnClickListener{
             saveAction()
@@ -32,7 +40,15 @@ class NewGroupSheet : BottomSheetDialogFragment() {
     }
 
     private fun saveAction() {
-        groupViewModel.groupName.value = binding.groupName.text.toString()
+        val groupName = binding.groupName.text.toString()
+        if(gruppe == null)
+        {
+            val newGruppe = Gruppe( groupName)
+            groupViewModel.addGruppe(newGruppe)
+        }
+        else {
+            groupViewModel.updateGruppe(gruppe!!.gruppenid, groupName)
+        }
         binding.groupName.setText("")
         dismiss()
     }
