@@ -16,4 +16,9 @@ class GroupRepository(private val groupDao: GroupDao)
     suspend fun updateGroupItem(groupItem: GroupItem) {
         groupDao.updateGroupItem(groupItem)
     }
+
+    @WorkerThread
+    suspend fun deleteGroupItem(groupItem: GroupItem) {
+        groupDao.deleteGroup(groupItem)
+    }
 }

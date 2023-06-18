@@ -12,4 +12,5 @@ class GroupViewHolder(
     fun bindGroupItem(groupItem: GroupItem){
         binding.groupName.text = groupItem.groupName
     }
+
 }

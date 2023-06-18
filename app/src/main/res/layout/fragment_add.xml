@@ -18,10 +18,11 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="100dp"
+            android:layout_width="119dp"
             android:layout_height="50dp"
-            android:text="Hinzufügen"
             android:padding="10dp"
+            android:text="Hinzufügen"
+            android:textAllCaps="false"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
