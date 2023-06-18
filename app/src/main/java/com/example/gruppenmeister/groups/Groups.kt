@@ -1,6 +1,7 @@
 package com.example.gruppenmeister.groups
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +15,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gruppenmeister.GroupMasterApplication
+import com.example.gruppenmeister.R
 import com.example.gruppenmeister.databinding.FragmentGroupsBinding
+
 
 class Groups : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentGroupsBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: GroupAdapter
+
     private val groupViewModel: GroupViewModel by viewModels {
         val activity= requireActivity()
         GroupItemModelFactory((activity?.application as GroupMasterApplication).repository)
@@ -28,27 +34,48 @@ class Groups : Fragment() {
 //        val activity= requireActivity()
 //        groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
 
+        //recyclerView = view.findViewById(R.id.recyclerView)
+        //adapter = GroupAdapter()
 
         binding.alphaSort.setOnClickListener {
-            var list : MutableList<GroupItem> = mutableListOf()
-            groupViewModel.gruppen.observe(viewLifecycleOwner) {
-                list = (it).toMutableList()
+            var list: MutableList<GroupItem> = mutableListOf()
+            val from_positionMap = mutableMapOf<GroupItem, Int>()
+            val to_positionMap = mutableMapOf<GroupItem, Int>()
+            groupViewModel.gruppen.observe(viewLifecycleOwner) { original ->
+                var list = original.toMutableList()
+                list.forEachIndexed{index, item ->
+                    from_positionMap[item] = index
+                }
                 list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
                 list.toList()
+                list.forEachIndexed{index, item ->
+                    to_positionMap[item] = index
+                }
+
+                groupViewModel.showGruppen.value = list
+                //adapter.notifyDataSetChanged()
+                /*from_positionMap.forEach { (item, fromPosition) ->
+                    //val toPosition = to_positionMap[item]
+                    if (to_positionMap.containsKey(item)) {
+                        // Änderungen an den Positionen durch notifyItemMoved reflektieren
+                        adapter.notifyItemMoved(fromPosition, to_positionMap[item]!!)
+                    }
+                }*/
             }
-            val adapter = GroupAdapter(list)
-            //val from_pos = RecyclerView.ViewHolder.adapterPosition
-            //val to_pos = target.adapterPosition
 
-
-            //adapter.notifyDataSetChanged()
-
-            list.forEach{
-                groupViewModel.deleteGruppe(it)
-                groupViewModel.addGroup(it)
-                //adapter.notifyItemMoved()
+            groupViewModel.showGruppen.observe(viewLifecycleOwner) { updatedList ->
+                adapter = GroupAdapter(list)
+                from_positionMap.forEach { (item, fromPosition) ->
+                    if (to_positionMap.containsKey(item)) {
+                        var to = to_positionMap[item]
+                        Handler().postDelayed({
+                            adapter.notifyItemMoved(fromPosition, to_positionMap[item]!!)
+                        }, 100)
+                    }
+                }
+                //adapter.notifyDataSetChanged()
+                println()
             }
-            groupViewModel.
         }
 
 
@@ -72,7 +99,12 @@ class Groups : Fragment() {
         groupViewModel.gruppen.observe(viewLifecycleOwner){
             binding.groupListRecyclerView.apply{
                 layoutManager = LinearLayoutManager(activity.applicationContext)
-                adapter = GroupAdapter(it)
+                if(groupViewModel.showGruppen.value == null) {
+                    adapter = GroupAdapter(it)
+                    groupViewModel.showGruppen.setValue(groupViewModel.gruppen.value)
+                }else {
+                    adapter = GroupAdapter(groupViewModel.showGruppen.value!!)
+                }
             }
         }
     }
