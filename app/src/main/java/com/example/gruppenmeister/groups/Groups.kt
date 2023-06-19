@@ -6,8 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.Group
-import androidx.core.view.get
+import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,8 +17,7 @@ import com.example.gruppenmeister.GroupMasterApplication
 import com.example.gruppenmeister.R
 import com.example.gruppenmeister.databinding.FragmentGroupsBinding
 
-
-class Groups : Fragment() {
+class Groups : Fragment(), GroupItemClickListener {
     // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentGroupsBinding
     private lateinit var recyclerView: RecyclerView
@@ -82,7 +80,7 @@ class Groups : Fragment() {
         binding.newGroupButton.setOnClickListener{
                 val newGroupSheet = NewGroupSheet(null)
             newGroupSheet.show(childFragmentManager,"newGroupTag")
-        }
+            }
         setRecyclerView()
     }
 
@@ -97,15 +95,10 @@ class Groups : Fragment() {
     fun setRecyclerView(){
         val activity= requireActivity()
         groupViewModel.gruppen.observe(viewLifecycleOwner){
-            binding.groupListRecyclerView.apply{
-                layoutManager = LinearLayoutManager(activity.applicationContext)
-                if(groupViewModel.showGruppen.value == null) {
-                    adapter = GroupAdapter(it)
-                    groupViewModel.showGruppen.setValue(groupViewModel.gruppen.value)
-                }else {
-                    adapter = GroupAdapter(groupViewModel.showGruppen.value!!)
-                }
-            }
+        binding.groupListRecyclerView.apply{
+            layoutManager = LinearLayoutManager(activity.applicationContext)
+            adapter = GroupAdapter(it, this@Groups)
+        }
         }
     }
 }
