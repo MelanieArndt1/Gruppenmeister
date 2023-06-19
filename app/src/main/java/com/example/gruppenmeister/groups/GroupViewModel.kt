@@ -17,6 +17,10 @@ class GroupViewModel(private val repository: GroupRepository): ViewModel() {
     fun updateGruppe(groupItem: GroupItem) = viewModelScope.launch {
         repository.updateGroupItem(groupItem)
     }
+
+    fun deleteGroup(groupItem: GroupItem) = viewModelScope.launch {
+        repository.deleteGroupItem(groupItem)
+    }
 }
 
 class GroupItemModelFactory(private val repository: GroupRepository): ViewModelProvider.Factory{

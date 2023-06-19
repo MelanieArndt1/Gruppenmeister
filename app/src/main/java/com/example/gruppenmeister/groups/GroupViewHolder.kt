@@ -15,5 +15,8 @@ class GroupViewHolder(
         binding.groupCellContainer.setOnClickListener{
             clickListener.editGroupItem(groupItem)
         }
+        binding.moreIcon.setOnClickListener{
+            clickListener.moreAction(groupItem, it)
+        }
     }
 }

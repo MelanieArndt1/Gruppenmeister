@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gruppenmeister.GroupMasterApplication
+import com.example.gruppenmeister.R
 import com.example.gruppenmeister.databinding.FragmentGroupsBinding
 
 class Groups : Fragment(), GroupItemClickListener {
@@ -49,5 +51,24 @@ class Groups : Fragment(), GroupItemClickListener {
 
     override fun editGroupItem(groupItem: GroupItem) {
         NewGroupSheet(groupItem).show(childFragmentManager,"newGroupTag")
+    }
+
+    override fun moreAction(groupItem: GroupItem, view: View) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.menuInflater.inflate(R.menu.more__group_item_actions_menu ,popup.menu)
+        popup.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.group_action_delete -> {
+                    groupViewModel.deleteGroup(groupItem)
+                    true
+                }
+                R.id.group_action_update -> {
+                    NewGroupSheet(groupItem).show(childFragmentManager, "newGroupTag")
+                    true
+                }
+                else -> false
+            }
+        }
+        popup.show()
     }
 }
