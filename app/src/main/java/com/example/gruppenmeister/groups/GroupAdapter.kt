@@ -20,4 +20,11 @@ class GroupAdapter(
     override fun onBindViewHolder(holder: GroupViewHolder, position: Int) {
         holder.bindGroupItem(groupItems[position])
     }
+
+    /*override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder){
+        val from_pos = viewHolder.adapterPosition
+        val to_pos = target.adapterPosition
+
+        a
+    }*/
 }

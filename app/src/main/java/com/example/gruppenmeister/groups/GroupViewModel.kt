@@ -1,6 +1,7 @@
 package com.example.gruppenmeister.groups
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -10,6 +11,7 @@ import java.lang.IllegalArgumentException
 
 class GroupViewModel(private val repository: GroupRepository): ViewModel() {
     var gruppen: LiveData<List<GroupItem>> = repository.allGroupItems.asLiveData()
+    var showGruppen: MutableLiveData<List<GroupItem>> = MutableLiveData<List<GroupItem>>()
     fun addGroup(newGroup: GroupItem) = viewModelScope.launch {
         repository.insertGroupItem(newGroup)
     }

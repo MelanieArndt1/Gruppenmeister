@@ -19,4 +19,5 @@ class GroupViewHolder(
             clickListener.moreAction(groupItem, it)
         }
     }
+
 }
