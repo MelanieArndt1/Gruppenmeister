@@ -33,47 +33,25 @@ class Groups : Fragment(), GroupItemClickListener {
 //        groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
 
         //recyclerView = view.findViewById(R.id.recyclerView)
-        //adapter = GroupAdapter()
-
+        //adapter = GroupAdapter(it, this@Groups)
+        var isSorted = false
         binding.alphaSort.setOnClickListener {
-            var list: MutableList<GroupItem> = mutableListOf()
-            val from_positionMap = mutableMapOf<GroupItem, Int>()
-            val to_positionMap = mutableMapOf<GroupItem, Int>()
             groupViewModel.gruppen.observe(viewLifecycleOwner) { original ->
                 var list = original.toMutableList()
-                list.forEachIndexed{index, item ->
-                    from_positionMap[item] = index
+                if(isSorted == false) {
+                    list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
+                    list.toList()
+                    groupViewModel.showGruppen.value = list
+                    isSorted = true
+                }else{
+                    list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
+                    list.reverse()
+                    list.toList()
+                    groupViewModel.showGruppen.value = list
+                    isSorted = false
                 }
-                list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
-                list.toList()
-                list.forEachIndexed{index, item ->
-                    to_positionMap[item] = index
-                }
-
-                groupViewModel.showGruppen.value = list
-                //adapter.notifyDataSetChanged()
-                /*from_positionMap.forEach { (item, fromPosition) ->
-                    //val toPosition = to_positionMap[item]
-                    if (to_positionMap.containsKey(item)) {
-                        // Änderungen an den Positionen durch notifyItemMoved reflektieren
-                        adapter.notifyItemMoved(fromPosition, to_positionMap[item]!!)
-                    }
-                }*/
             }
-
-            groupViewModel.showGruppen.observe(viewLifecycleOwner) { updatedList ->
-                adapter = GroupAdapter(list)
-                from_positionMap.forEach { (item, fromPosition) ->
-                    if (to_positionMap.containsKey(item)) {
-                        var to = to_positionMap[item]
-                        Handler().postDelayed({
-                            adapter.notifyItemMoved(fromPosition, to_positionMap[item]!!)
-                        }, 100)
-                    }
-                }
-                //adapter.notifyDataSetChanged()
-                println()
-            }
+            updateRecyclerView()
         }
 
 
@@ -100,5 +78,38 @@ class Groups : Fragment(), GroupItemClickListener {
             adapter = GroupAdapter(it, this@Groups)
         }
         }
+    }
+
+    fun updateRecyclerView(){
+        val activity= requireActivity()
+        groupViewModel.showGruppen.observe(viewLifecycleOwner){
+            binding.groupListRecyclerView.apply{
+                layoutManager = LinearLayoutManager(activity.applicationContext)
+                adapter = GroupAdapter(it, this@Groups)
+            }
+        }
+    }
+
+    override fun editGroupItem(groupItem: GroupItem) {
+        NewGroupSheet(groupItem).show(childFragmentManager,"newGroupTag")
+    }
+
+    override fun moreAction(groupItem: GroupItem, view: View) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.menuInflater.inflate(R.menu.more__group_item_actions_menu ,popup.menu)
+        popup.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.group_action_delete -> {
+                    groupViewModel.deleteGroup(groupItem)
+                    true
+                }
+                R.id.group_action_update -> {
+                    NewGroupSheet(groupItem).show(childFragmentManager, "newGroupTag")
+                    true
+                }
+                else -> false
+            }
+        }
+        popup.show()
     }
 }
