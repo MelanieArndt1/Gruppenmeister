@@ -7,7 +7,7 @@ import com.example.gruppenmeister.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,23 +15,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(Home())
 
-        supportActionBar?.hide() // Action Bar ausblenden
+        supportActionBar?.hide() // Hide the action bar
 
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> replaceFragment(Home())
-                R.id.todo -> replaceFragment(Todo())
-                R.id.groups -> replaceFragment(Groups())
-                else -> {}
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> replaceFragment(Home()) // Replace fragment with Home fragment
+                R.id.todo -> replaceFragment(Todo()) // Replace fragment with Todo fragment
+                R.id.groups -> replaceFragment(Groups()) // Replace fragment with Groups fragment
+                else -> {} // Do nothing if the selected item is unknown
             }
-            true
+            true // Return true to indicate that the item selection is handled
         }
     }
 
-    private fun replaceFragment(fragment : Fragment){
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout,fragment)
-        fragmentTransaction.commit()
+        fragmentTransaction.replace(R.id.frame_layout, fragment) // Replace the current fragment with the specified fragment
+        fragmentTransaction.commit() // Commit the fragment transaction
     }
 }
