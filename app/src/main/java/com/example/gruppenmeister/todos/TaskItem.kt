@@ -31,11 +31,16 @@ data class TaskItem(
 
     fun taskDue():LocalDate? = if(taskDueString == null) null else LocalDate.parse(taskDueString, dateFormatter)
     fun checkImageRessource(): Int = if(isCompleted) R.drawable.baseline_check_box_24 else R.drawable.baseline_check_box_outline_blank_24
+    fun checkImageColor(context: Context):Int = if (isCompleted) purple(context) else black(context)
     fun prioImageRessource(): Int = if(taskPrio == 1) R.drawable.baseline_star_24 else R.drawable.baseline_star_border_24
-    fun imageColor(context: Context):Int = if (isCompleted) purple(context) else black(context)
+    fun prioImageColor(context: Context):Int = if (taskPrio == 1) gold(context) else white(context)
+
     private fun purple(context: Context) = ContextCompat.getColor(context, R.color.purple_200)
 
     private fun black(context: Context) = ContextCompat.getColor(context, R.color.black)
+
+    private fun gold(context: Context) = ContextCompat.getColor(context, R.color.gold)
+    private fun white(context: Context) = ContextCompat.getColor(context, R.color.white)
 
     companion object{
         val dateFormatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE

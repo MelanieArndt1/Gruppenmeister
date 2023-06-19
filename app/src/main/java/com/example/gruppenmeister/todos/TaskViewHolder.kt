@@ -20,8 +20,11 @@ class TaskViewHolder(
             binding.dueName.text =  ""
 
         binding.checkButton.setImageResource(taskItem.checkImageRessource())
+        binding.checkButton.setColorFilter(taskItem.checkImageColor(context))
+
         binding.prioIcon.setImageResource(taskItem.prioImageRessource())
-        binding.checkButton.setColorFilter(taskItem.imageColor(context))
+        binding.prioIcon.setColorFilter(taskItem.prioImageColor(context))
+
         binding.taskCellContainer.setOnClickListener{
             clickListener.showTaskItemDetails(taskItem)
         }
