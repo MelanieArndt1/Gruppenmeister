@@ -7,6 +7,9 @@
     <item android:title="@string/todos_title"
         android:id="@+id/todo"
         android:icon="@drawable/ic_todo"/>
+    <item android:title="Add Todo"
+        android:id="@+id/add"
+        android:icon="@drawable/ic_add"/>
     <item android:title="@string/group_title"
         android:id="@+id/groups"
         android:icon="@drawable/ic_groups"/>

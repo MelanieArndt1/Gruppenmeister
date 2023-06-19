@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.gruppenmeister.databinding.ActivityMainBinding
+import com.example.gruppenmeister.groups.Groups
 
 class MainActivity : AppCompatActivity() {
 

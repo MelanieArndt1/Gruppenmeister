@@ -1,0 +1,96 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "332508af744b30fab962dc2daa206e52",
+    "entities": [
+      {
+        "tableName": "Gruppe",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `gruppenid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "groupName",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gruppenid",
+            "columnName": "gruppenid",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "gruppenid"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Aufgabe",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`aufgabenid` INTEGER NOT NULL, `name` TEXT NOT NULL, `beginnt` INTEGER NOT NULL, `endet` INTEGER NOT NULL, `beschreibung` TEXT NOT NULL, `prio` INTEGER NOT NULL, `gruppenid` INTEGER NOT NULL, PRIMARY KEY(`aufgabenid`))",
+        "fields": [
+          {
+            "fieldPath": "aufgabenid",
+            "columnName": "aufgabenid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "beginnt",
+            "columnName": "beginnt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endet",
+            "columnName": "endet",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "beschreibung",
+            "columnName": "beschreibung",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "prio",
+            "columnName": "prio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gruppenid",
+            "columnName": "gruppenid",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "aufgabenid"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '332508af744b30fab962dc2daa206e52')"
+    ]
+  }
+}
