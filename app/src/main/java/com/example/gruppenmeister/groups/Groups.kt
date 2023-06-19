@@ -25,15 +25,11 @@ class Groups : Fragment(), GroupItemClickListener {
 
     private val groupViewModel: GroupViewModel by viewModels {
         val activity= requireActivity()
-        GroupItemModelFactory((activity?.application as GroupMasterApplication).repository)
+        GroupItemModelFactory((activity.application as GroupMasterApplication).groupRepository)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val activity= requireActivity()
-//        groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
 
-        //recyclerView = view.findViewById(R.id.recyclerView)
-        //adapter = GroupAdapter(it, this@Groups)
         var isSorted = false
         binding.alphaSort.setOnClickListener {
             groupViewModel.gruppen.observe(viewLifecycleOwner) { original ->
@@ -53,7 +49,6 @@ class Groups : Fragment(), GroupItemClickListener {
             }
             updateRecyclerView()
         }
-
 
         binding.newGroupButton.setOnClickListener{
                 val newGroupSheet = NewGroupSheet(null)
@@ -96,14 +91,14 @@ class Groups : Fragment(), GroupItemClickListener {
 
     override fun moreAction(groupItem: GroupItem, view: View) {
         val popup = PopupMenu(requireContext(), view)
-        popup.menuInflater.inflate(R.menu.more__group_item_actions_menu ,popup.menu)
+        popup.menuInflater.inflate(R.menu.more_item_actions_menu ,popup.menu)
         popup.setOnMenuItemClickListener {
             when(it.itemId) {
-                R.id.group_action_delete -> {
+                R.id.action_delete -> {
                     groupViewModel.deleteGroup(groupItem)
                     true
                 }
-                R.id.group_action_update -> {
+                R.id.action_update -> {
                     NewGroupSheet(groupItem).show(childFragmentManager, "newGroupTag")
                     true
                 }
