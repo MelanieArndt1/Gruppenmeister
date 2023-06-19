@@ -21,13 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener {
 
-            val changePage = Intent(this, AddActivity::class.java)
+
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
                 R.id.todo -> replaceFragment(Tasks())
                 R.id.groups -> replaceFragment(Groups())
-                R.id.add -> startActivity(changePage)
-
                 else ->{
 
 
