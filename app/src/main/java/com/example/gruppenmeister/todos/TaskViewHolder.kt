@@ -13,9 +13,6 @@ class TaskViewHolder(
     val dateFormatter = DateTimeFormatter.ofPattern("dd/MMMM/yy")
     fun bindTaskItem(taskItem: TaskItem){
         binding.taskName.text = taskItem.taskName
-
-        //binding.prioIcon. = taskItem.prio
-
         if(taskItem.taskDue() != null) {
             binding.dueName.text = dateFormatter.format(taskItem.taskDue())
         }

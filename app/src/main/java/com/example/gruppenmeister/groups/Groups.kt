@@ -52,14 +52,14 @@ class Groups : Fragment(), GroupItemClickListener {
 
     override fun moreAction(groupItem: GroupItem, view: View) {
         val popup = PopupMenu(requireContext(), view)
-        popup.menuInflater.inflate(R.menu.more__group_item_actions_menu ,popup.menu)
+        popup.menuInflater.inflate(R.menu.more_item_actions_menu ,popup.menu)
         popup.setOnMenuItemClickListener {
             when(it.itemId) {
-                R.id.group_action_delete -> {
+                R.id.action_delete -> {
                     groupViewModel.deleteGroup(groupItem)
                     true
                 }
-                R.id.group_action_update -> {
+                R.id.action_update -> {
                     NewGroupSheet(groupItem).show(childFragmentManager, "newGroupTag")
                     true
                 }
