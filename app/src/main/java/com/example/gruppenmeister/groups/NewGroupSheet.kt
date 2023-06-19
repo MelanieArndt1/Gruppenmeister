@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.gruppenmeister.GroupMasterApplication
 import com.example.gruppenmeister.databinding.FragmentNewGroupSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -16,11 +15,10 @@ class NewGroupSheet(var groupItem: GroupItem? ) : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentNewGroupSheetBinding
     private val groupViewModel: GroupViewModel by viewModels {
         val activity= requireActivity()
-        GroupItemModelFactory((activity?.application as GroupMasterApplication).repository)
+        GroupItemModelFactory((activity.application as GroupMasterApplication).groupRepository)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val activity= requireActivity()
 
         if(groupItem != null) {
             binding.title.text = "Gruppe bearbeiten"

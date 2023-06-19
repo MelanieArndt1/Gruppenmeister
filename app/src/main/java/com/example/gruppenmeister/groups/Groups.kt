@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gruppenmeister.GroupMasterApplication
 import com.example.gruppenmeister.R
@@ -18,12 +17,10 @@ class Groups : Fragment(), GroupItemClickListener {
     private lateinit var binding: FragmentGroupsBinding
     private val groupViewModel: GroupViewModel by viewModels {
         val activity= requireActivity()
-        GroupItemModelFactory((activity?.application as GroupMasterApplication).repository)
+        GroupItemModelFactory((activity.application as GroupMasterApplication).groupRepository)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val activity= requireActivity()
-//        groupViewModel = ViewModelProvider(activity).get(GroupViewModel::class.java)
         binding.newGroupButton.setOnClickListener{
                 val newGroupSheet = NewGroupSheet(null)
             newGroupSheet.show(childFragmentManager,"newGroupTag")

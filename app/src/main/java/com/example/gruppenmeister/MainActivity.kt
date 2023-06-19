@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.gruppenmeister.databinding.ActivityMainBinding
 import com.example.gruppenmeister.groups.Groups
+import com.example.gruppenmeister.todos.Tasks
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             val changePage = Intent(this, AddActivity::class.java)
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
-                R.id.todo -> replaceFragment(Todo())
+                R.id.todo -> replaceFragment(Tasks())
                 R.id.groups -> replaceFragment(Groups())
                 R.id.add -> startActivity(changePage)
 
