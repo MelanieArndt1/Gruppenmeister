@@ -22,12 +22,14 @@ class Tasks : Fragment(), TaskItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //var origin = List<TaskItem>(8,3)
         var start = true
         var isSorted = false
         binding.alphaSort.setOnClickListener {
             taskViewModel.tasks.observe(viewLifecycleOwner) { original ->
+                var origin = original
                 var list = original.toMutableList()
-                if(isSorted == false) {
+                if(isSorted == false && start == true) {
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.taskName }))
                     list.toList()
                     taskViewModel.showTasks.value = list
@@ -38,6 +40,10 @@ class Tasks : Fragment(), TaskItemClickListener {
                     list.toList()
                     taskViewModel.showTasks.value = list
                     isSorted = false
+                    start = false
+                }else if(start == false){
+                    taskViewModel.showTasks.value = origin
+                    start = true
                 }
             }
             updateRecyclerView()
@@ -48,7 +54,7 @@ class Tasks : Fragment(), TaskItemClickListener {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         binding.dateSort.setOnClickListener {
             taskViewModel.tasks.observe(viewLifecycleOwner) { original ->
-                val origin = original
+                var origin = original
                 var list = original.toMutableList()
                 if(isDateSorted == false && startDate == true) {
                     list.sortBy {dateFormat.parse(it.taskDueString)}
@@ -61,10 +67,14 @@ class Tasks : Fragment(), TaskItemClickListener {
                     list.toList()
                     taskViewModel.showTasks.value = list
                     isDateSorted = false
-                    start = false
-                }else if(start == false){
+                    startDate = false
+                }else if(startDate == false){
+                    taskViewModel.showTasks.value = origin
+                    startDate = true
+                }else{
                     taskViewModel.showTasks.value = origin
                     start = true
+                    isDateSorted = false
                 }
             }
             updateRecyclerView()
