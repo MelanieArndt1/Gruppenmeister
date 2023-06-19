@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gruppenmeister.GroupMasterApplication
+import com.example.gruppenmeister.MainActivity
+import com.example.gruppenmeister.R
 import com.example.gruppenmeister.databinding.FragmentToDosBinding
 
 class Tasks : Fragment(), TaskItemClickListener {
@@ -43,8 +45,10 @@ class Tasks : Fragment(), TaskItemClickListener {
             }
         }
     }
-    override fun editTaskItem(taskItem: TaskItem) {
-        NewTaskSheet(taskItem).show(childFragmentManager, "newTaskTag")
+    override fun showTaskItemDetails(taskItem: TaskItem) {
+        val fragment = ToDoDetail(taskItem)
+        (requireActivity() as MainActivity).replaceFragment(fragment)
+        //NewTaskSheet(taskItem).show(childFragmentManager, "newTaskTag")
     }
 
     override fun completeTaskItem(taskItem: TaskItem) {

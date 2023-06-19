@@ -26,7 +26,7 @@ class TaskViewHolder(
         binding.prioIcon.setImageResource(taskItem.prioImageRessource())
         binding.checkButton.setColorFilter(taskItem.imageColor(context))
         binding.taskCellContainer.setOnClickListener{
-            clickListener.editTaskItem(taskItem)
+            clickListener.showTaskItemDetails(taskItem)
         }
         binding.checkButton.setOnClickListener{
             clickListener.completeTaskItem(taskItem)
