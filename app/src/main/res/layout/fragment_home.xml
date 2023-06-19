@@ -47,7 +47,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="@color/text"
                 android:layout_columnSpan="2"/>
 
             <androidx.cardview.widget.CardView
@@ -83,7 +83,7 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:paddingHorizontal="12dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -120,7 +120,7 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:paddingHorizontal="12dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -132,7 +132,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="@color/text"
                 android:layout_columnSpan="2"
                 android:layout_marginTop="20dp"/>
 
@@ -169,7 +169,7 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:paddingHorizontal="12dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -206,7 +206,7 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:paddingHorizontal="12dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
