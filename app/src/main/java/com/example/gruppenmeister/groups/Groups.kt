@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gruppenmeister.GroupMasterApplication
 import com.example.gruppenmeister.databinding.FragmentGroupsBinding
 
-class Groups : Fragment() {
+class Groups : Fragment(), GroupItemClickListener {
     // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentGroupsBinding
     private val groupViewModel: GroupViewModel by viewModels {
@@ -42,8 +42,12 @@ class Groups : Fragment() {
         groupViewModel.gruppen.observe(viewLifecycleOwner){
         binding.groupListRecyclerView.apply{
             layoutManager = LinearLayoutManager(activity.applicationContext)
-            adapter = GroupAdapter(it)
+            adapter = GroupAdapter(it, this@Groups)
         }
         }
+    }
+
+    override fun editGroupItem(groupItem: GroupItem) {
+        NewGroupSheet(groupItem).show(childFragmentManager,"newGroupTag")
     }
 }
