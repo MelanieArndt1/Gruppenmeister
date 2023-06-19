@@ -12,12 +12,14 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp">
 
+        <!-- Top View -->
         <View
             android:id="@+id/top_view_home"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@drawable/bg_view_home"/>
 
+        <!-- App Title -->
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -29,6 +31,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"/>
 
+        <!-- GridLayout for cards and texts -->
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,6 +42,7 @@
             android:layout_marginTop="20dp"
             android:layout_below="@+id/top_view_home">
 
+            <!-- Heading for the "Benefits" section -->
             <TextView
                 android:id="@+id/benefitsTextView"
                 android:layout_width="match_parent"
@@ -47,9 +51,10 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="@color/text"
                 android:layout_columnSpan="2"/>
 
+            <!-- Card 1 -->
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="120dp"
@@ -83,10 +88,11 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:paddingHorizontal="12dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Card 2 -->
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="120dp"
@@ -120,10 +126,11 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:paddingHorizontal="12dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Heading for the "Release" section -->
             <TextView
                 android:id="@+id/releaseTextView"
                 android:layout_width="match_parent"
@@ -132,10 +139,11 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/black"
+                android:textColor="@color/text"
                 android:layout_columnSpan="2"
                 android:layout_marginTop="20dp"/>
 
+            <!-- Card 3 -->
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="120dp"
@@ -169,10 +177,11 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:paddingHorizontal="12dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Card 4 -->
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="120dp"
@@ -206,7 +215,7 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:paddingHorizontal="12dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/text"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

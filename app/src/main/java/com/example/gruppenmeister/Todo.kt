@@ -41,5 +41,4 @@ class Todo : Fragment() {
         return view
 
     }
-
 }
