@@ -8,7 +8,7 @@
     android:foregroundTint="#673AB7"
     tools:context=".groups.Groups">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <Button
         android:id="@+id/alphaSort"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
@@ -19,10 +19,8 @@
         android:text="Gruppenname"
         android:textAllCaps="false"
         android:textColor="@color/purple_200"
-        android:background="@color/white"
         android:textSize="16sp"
-        android:textStyle="bold"
-        app:cornerRadius="1dp"/>
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupListRecyclerView"
