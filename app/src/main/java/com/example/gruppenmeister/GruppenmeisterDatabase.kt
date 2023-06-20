@@ -14,6 +14,7 @@ import com.example.gruppenmeister.todos.TaskItem
     exportSchema = false
 )
 
+//Abstracte Klasse zum initalisieren und erstellen der Datenbank
 abstract class GruppenmeisterDatabase : RoomDatabase() {
 
     abstract fun taskDao(): TaskDao
@@ -22,7 +23,8 @@ abstract class GruppenmeisterDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: GruppenmeisterDatabase? = null
-
+        
+        //Überprüfen ob die Datenbank schon initalisiert worden nicht, wenn nicht wird sie initalisiert
         fun getDatabase(context: Context): GruppenmeisterDatabase {
             return INSTANCE ?: synchronized(this)
             {
