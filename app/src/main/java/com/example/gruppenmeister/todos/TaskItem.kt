@@ -9,6 +9,7 @@ import com.example.gruppenmeister.R
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 
+//Entity Klasse die gleichzeitig mit Room die Aufgabentabelle in der Datenbank anlegt
 @Entity(tableName = "Aufgabe")
 data class TaskItem(
     @ColumnInfo(name= "name")
