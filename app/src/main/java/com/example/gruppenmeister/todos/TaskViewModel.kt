@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
+
+//Viewmodel Klasse mit funktionen, die die Objekte der App an das Repository übergeben
 class TaskViewModel(private val repository: TaskRepository): ViewModel() {
     var tasks: LiveData<List<TaskItem>> = repository.allTaskItems.asLiveData()
     fun addTask(newTask: TaskItem) = viewModelScope.launch {
