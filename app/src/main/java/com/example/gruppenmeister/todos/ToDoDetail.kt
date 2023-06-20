@@ -15,6 +15,7 @@ import com.example.gruppenmeister.databinding.FragmentTodoDetailBinding
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Calendar
 
+//Klasse für die Logik hinter der Todo-Detailansicht
 class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
     private lateinit var binding: FragmentTodoDetailBinding
     private val taskViewModel: TaskViewModel by viewModels {
@@ -22,9 +23,10 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
         TaskItemModelFactory((activity.application as GroupMasterApplication).taskRepository)
     }
 
+    //Funktion die während der Erstellung der View ausgeführt wird
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //Falls das ToDo-Objekt existiert werden dessen werte dem XMLLayout übergeben
         if(taskItem != null) {
             val editable = Editable.Factory.getInstance()
             binding.Name.text = editable.newEditable("Name: \n"+ taskItem!!.taskName)
@@ -48,6 +50,7 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
         }
     }
 
+    //Funktion für das öffnen des Popupmenüs und das weiterleiten zu anderen Activitys oder Fragments
     private fun moreAction() {
         val popup = PopupMenu(requireContext(), binding.moreIcon)
         popup.menuInflater.inflate(R.menu.more_item_actions_menu ,popup.menu)
@@ -69,6 +72,7 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
         popup.show()
     }
 
+    //Funktion zum Navigieren zwischen den Fragments
     private fun backAction() {
         val fragment = Tasks()
         (requireActivity() as MainActivity).replaceFragment(fragment)
