@@ -50,6 +50,8 @@ class Groups : Fragment(), GroupItemClickListener {
                     list.toList()
                     groupViewModel.showGruppen.value = list
                     isSorted = true
+                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else if(isSorted == true && start == true){
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
                     list.reverse()
@@ -57,6 +59,8 @@ class Groups : Fragment(), GroupItemClickListener {
                     groupViewModel.showGruppen.value = list
                     isSorted = false
                     start = false
+                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else if(start == false){
                     groupViewModel.showGruppen.value = origin
                     start = true

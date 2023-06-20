@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gruppenmeister.GroupMasterApplication
@@ -36,6 +37,8 @@ class Tasks : Fragment(), TaskItemClickListener {
                     list.toList()
                     taskViewModel.showTasks.value = list
                     isSorted = true
+                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else if(isSorted == true && start == true){
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.taskName }))
                     list.reverse()
@@ -43,6 +46,8 @@ class Tasks : Fragment(), TaskItemClickListener {
                     taskViewModel.showTasks.value = list
                     isSorted = false
                     start = false
+                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else if(start == false){
                     taskViewModel.showTasks.value = origin
                     start = true
@@ -63,6 +68,8 @@ class Tasks : Fragment(), TaskItemClickListener {
                     list.toList()
                     taskViewModel.showTasks.value = list
                     isDateSorted = true
+                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else if(isDateSorted == true && start == true){
                     list.sortBy {dateFormat.parse(it.taskDueString)}
                     list.reverse()
@@ -70,6 +77,8 @@ class Tasks : Fragment(), TaskItemClickListener {
                     taskViewModel.showTasks.value = list
                     isDateSorted = false
                     startDate = false
+                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else if(startDate == false){
                     taskViewModel.showTasks.value = origin
                     startDate = true
