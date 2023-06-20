@@ -33,6 +33,7 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
             val editable = Editable.Factory.getInstance()
             binding.taskName.text = editable.newEditable(taskItem!!.taskName)
             binding.taskDesc.text = editable.newEditable(taskItem!!.taskDesc)
+            prio = taskItem!!.taskPrio
             binding.prioSwitch.isChecked = taskItem!!.taskPrio == 1
             if(taskItem!!.taskDue() != null)
             {

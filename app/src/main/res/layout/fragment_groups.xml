@@ -8,54 +8,25 @@
     android:foregroundTint="#673AB7"
     tools:context=".groups.Groups">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/sort_bar"
-        android:layout_width="277dp"
+    <Button
+        android:id="@+id/alphaSort"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:foregroundTint="#673AB7">
-
-        <Button
-            android:id="@+id/alphaSort"
-            android:layout_width="133dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#00673AB7"
-            android:drawableEnd="@drawable/baseline_sort_by_alpha_24"
-            android:drawableTintMode="add"
-            android:text="Dateiname"
-            android:textAllCaps="false"
-            android:textColor="@color/purple_200"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/date_sort"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/date_sort"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:backgroundTint="#00FFFFFF"
-            android:drawableEnd="@drawable/baseline_compare_arrows_24"
-            android:drawableTintMode="add"
-            android:text="Datum"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/purple_200"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.08"
-            app:layout_constraintStart_toEndOf="@+id/alpha_sort"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        android:backgroundTint="#00673AB7"
+        android:drawableEnd="@drawable/baseline_sort_by_alpha_24"
+        android:drawableTintMode="add"
+        android:text="Gruppenname"
+        android:textAllCaps="false"
+        android:textColor="@color/purple_200"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/sort_bar"
+        android:layout_below="@id/alphaSort"
         android:backgroundTint="@color/black"></androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
