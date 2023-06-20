@@ -3,6 +3,7 @@ package com.example.gruppenmeister.todos
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
 
+//Repository Klasse, die die Objekte aus der App an das Dao Interface liefern
 class TaskRepository(private val TaskDao: TaskDao)
 {
     val allTaskItems: Flow<List<TaskItem>> = TaskDao.allTaskItems()
