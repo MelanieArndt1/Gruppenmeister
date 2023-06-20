@@ -3,6 +3,7 @@ package com.example.gruppenmeister.groups
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
+//Dao Interface von Room für die CRUD Schicht
 @Dao
 interface GroupDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
