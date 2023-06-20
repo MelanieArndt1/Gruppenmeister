@@ -1,5 +1,6 @@
 package com.example.gruppenmeister.groups
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,6 +25,13 @@ class Groups : Fragment(), GroupItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: GroupAdapter
 
+    private fun purple(context: Context) = ContextCompat.getColor(context, R.color.purple_200)
+    private fun black(context: Context) = ContextCompat.getColor(context, R.color.black)
+    private fun gold(context: Context) = ContextCompat.getColor(context, R.color.gold)
+    private fun white(context: Context) = ContextCompat.getColor(context, R.color.white)
+
+
+
     private val groupViewModel: GroupViewModel by viewModels {
         val activity= requireActivity()
         GroupItemModelFactory((activity.application as GroupMasterApplication).groupRepository)
@@ -30,21 +39,27 @@ class Groups : Fragment(), GroupItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var start = true
         var isSorted = false
         binding.alphaSort.setOnClickListener {
             groupViewModel.gruppen.observe(viewLifecycleOwner) { original ->
+                var origin = original
                 var list = original.toMutableList()
-                if(isSorted == false) {
+                if(isSorted == false && start == true) {
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
                     list.toList()
                     groupViewModel.showGruppen.value = list
                     isSorted = true
-                }else{
+                }else if(isSorted == true && start == true){
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
                     list.reverse()
                     list.toList()
                     groupViewModel.showGruppen.value = list
                     isSorted = false
+                    start = false
+                }else if(start == false){
+                    groupViewModel.showGruppen.value = origin
+                    start = true
                 }
             }
             updateRecyclerView()

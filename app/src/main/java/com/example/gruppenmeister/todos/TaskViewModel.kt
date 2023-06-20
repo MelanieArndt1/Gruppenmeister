@@ -1,10 +1,12 @@
 package com.example.gruppenmeister.todos
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.gruppenmeister.groups.GroupItem
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
@@ -12,6 +14,7 @@ import java.lang.IllegalArgumentException
 //Viewmodel Klasse mit funktionen, die die Objekte der App an das Repository übergeben
 class TaskViewModel(private val repository: TaskRepository): ViewModel() {
     var tasks: LiveData<List<TaskItem>> = repository.allTaskItems.asLiveData()
+    var showTasks: MutableLiveData<List<TaskItem>> = MutableLiveData<List<TaskItem>>()
     fun addTask(newTask: TaskItem) = viewModelScope.launch {
         repository.insertTaskItem(newTask)
     }
