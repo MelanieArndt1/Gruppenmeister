@@ -51,6 +51,8 @@ class Tasks : Fragment(), TaskItemClickListener {
                 }else if(start == false){
                     taskViewModel.showTasks.value = origin
                     start = true
+                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
+                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
                 }
             }
             updateRecyclerView()
@@ -68,8 +70,8 @@ class Tasks : Fragment(), TaskItemClickListener {
                     list.toList()
                     taskViewModel.showTasks.value = list
                     isDateSorted = true
-                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
+                    binding.dateSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.dateSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else if(isDateSorted == true && start == true){
                     list.sortBy {dateFormat.parse(it.taskDueString)}
                     list.reverse()
@@ -77,15 +79,19 @@ class Tasks : Fragment(), TaskItemClickListener {
                     taskViewModel.showTasks.value = list
                     isDateSorted = false
                     startDate = false
-                    binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                    binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
+                    binding.dateSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.dateSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else if(startDate == false){
                     taskViewModel.showTasks.value = origin
                     startDate = true
+                    binding.dateSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
+                    binding.dateSort.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
                 }else{
                     taskViewModel.showTasks.value = origin
                     start = true
                     isDateSorted = false
+                    binding.dateSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
+                    binding.dateSort.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
                 }
             }
             updateRecyclerView()
@@ -101,9 +107,14 @@ class Tasks : Fragment(), TaskItemClickListener {
                     filteredList.toList()
                     taskViewModel.showTasks.value = filteredList
                     isFiltered = true
+                    binding.prioFilter.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    binding.prioFilter.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }else{
                     taskViewModel.showTasks.value = list
                     isFiltered = false
+                    binding.prioFilter.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
+                    binding.prioFilter.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
+
                 }
 
             }
