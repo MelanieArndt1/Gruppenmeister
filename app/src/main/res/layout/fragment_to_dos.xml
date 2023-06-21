@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:foregroundTint="#673AB7">
 
-        <Button
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/alphaSort"
-            android:layout_width="133dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="3dp"
             android:backgroundTint="#00673AB7"
@@ -31,11 +31,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/date_sort"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="0dp"
             android:backgroundTint="#00FFFFFF"
             android:drawableEnd="@drawable/baseline_compare_arrows_24"
             android:drawableTintMode="add"
@@ -50,9 +50,9 @@
             app:layout_constraintStart_toEndOf="@+id/alpha_sort"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/prio_filter"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#00FFFFFF"
             android:drawableTintMode="add"
