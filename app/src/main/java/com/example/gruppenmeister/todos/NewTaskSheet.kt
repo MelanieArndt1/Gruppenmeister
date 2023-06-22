@@ -25,9 +25,12 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
     private var dueDate: LocalDate? = null
     private var prio: Int = 0
     private val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MMMM/yy")
+
+    // Diese Methode wird aufgerufen, sobald die View erstellt wurde.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Wenn eine Task vorhanden ist, wird der Titel auf "Aufgabe bearbeiten" gesetzt und die Felder werden mit den Werten der Task gefüllt.
         if(taskItem != null) {
             binding.title.text = "Aufgabe bearbeiten"
             val editable = Editable.Factory.getInstance()
@@ -41,13 +44,18 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
                 updateDateButtonText()
             }
         }
+
+        // Wenn keine Task vorhanden ist, wird der Titel auf "Neue Aufgabe" gesetzt.
         else {
             binding.title.text = "Neue Aufgabe"
         }
+
+        // Der Button zum Öffnen des DatePickers wird initialisiert.
         binding.datePickerButton.setOnClickListener{
             openDatePicker()
         }
 
+        // OnCheckedChangeListener für dieSwitch-Material komponente
         binding.prioSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             run {
                 if (isChecked) {
@@ -57,12 +65,14 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
                 }
             }
         }
+
+        // OnClickListener für den Speicher-Button
         binding.taskSpeichernButton.setOnClickListener{
             saveAction()
         }
     }
 
-
+    // Diese Methode öffnet den DatePicker und aktualisiert das Datum.
     private fun openDatePicker() {
         if(dueDate == null)
             dueDate = LocalDate.now()
@@ -75,10 +85,12 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
         dialog.show()
     }
 
+    // Diese Methode aktualisiert den Text des DatePickers.
     private fun updateDateButtonText() {
         binding.datePickerButton.text = dateFormatter.format(dueDate)
     }
 
+    // Diese Methode erstellt die View
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -87,15 +99,20 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
         return binding.root
     }
 
+    // Diese Methode speichert die Task.
     private fun saveAction() {
         val taskName = binding.taskName.text.toString()
         val taskDesc = binding.taskDesc.text.toString()
         val taskDueString = if(dueDate == null) null else TaskItem.dateFormatter.format(dueDate)
+
+        // Wenn keine Task vorhanden ist, wird eine neue Task erstellt.
         if(taskItem == null)
         {
            val newGroupItem = TaskItem( taskName, taskDesc, taskDueString, prio)
             taskViewModel.addTask(newGroupItem)
         }
+
+        // Wenn eine Task vorhanden ist, wird die bestehende Task aktualisiert.
         else {
             taskItem!!.taskName = taskName
             taskItem!!.taskDesc = taskDesc
@@ -103,10 +120,12 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
             taskItem!!.taskPrio = prio
             taskViewModel.updateGruppe(taskItem!!)
         }
+
+        // Die Felder werden geleert und das DialogFragment wird geschlossen.
         binding.taskName.setText("")
         binding.taskDesc.setText("")
         binding.prioSwitch.isChecked = false
         binding.datePickerButton.setText("")
         dismiss()
     }
-    }
+}
