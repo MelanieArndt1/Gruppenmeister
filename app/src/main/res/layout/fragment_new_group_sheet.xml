@@ -8,6 +8,7 @@
     android:background="#121212"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- Ein TextView wird verwendet, um Text anzuzeigen -->
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -18,6 +19,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         style="@style/TextAppearance.AppCompat.Title"/>
+
+    <!-- Ein TextInputLayout wird verwendet, um ein Textfeld mit einem Label und einer Box darum anzuzeigen -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,6 +33,8 @@
         android:hint="Gruppen Name"
         style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
         >
+
+        <!-- Ein TextInputEditText wird verwendet, um Text in einem Textfeld anzuzeigen -->
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,14 +43,16 @@
             android:textColor="@color/white"
             />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Ein MaterialButton wird verwendet, um eine Schaltfläche anzuzeigen -->
 <com.google.android.material.button.MaterialButton
-    android:id="@+id/gruppeSpeichernButton"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginHorizontal="20dp"
-    android:layout_marginBottom="20dp"
-    android:backgroundTint="@color/purple_200"
-    android:textColor="@color/white"
-    android:text="Speichern"/>
+   android:id="@+id/gruppeSpeichernButton"
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   android:layout_gravity="center"
+   android:layout_marginHorizontal="20dp"
+   android:layout_marginBottom="20dp"
+   android:backgroundTint="@color/purple_200"
+   android:textColor="@color/white"
+   android:text="Speichern"/>
 </LinearLayout>

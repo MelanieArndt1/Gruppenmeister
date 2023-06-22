@@ -8,12 +8,14 @@
     android:id="@+id/tasks"
     tools:context=".todos.Tasks">
 
+    <!-- Ein LinearLayoutCompat wird verwendet, um Verschiedenen Komponenten in einer Richtung an zu zeigen -->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/sort_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foregroundTint="#673AB7">
 
+        <!-- Ein ExtendedFloatingActionButton wird verwendet, um eine Schaltfläche mit erweiterten Funktionen anzuzeigen -->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/alphaSort"
             android:layout_width="wrap_content"
@@ -31,6 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Ein ExtendedFloatingActionButton wird verwendet, um eine Schaltfläche mit erweiterten Funktionen anzuzeigen -->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/date_sort"
             android:layout_width="wrap_content"
@@ -50,6 +53,7 @@
             app:layout_constraintStart_toEndOf="@+id/alpha_sort"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Ein ExtendedFloatingActionButton wird verwendet, um eine Schaltfläche mit erweiterten Funktionen anzuzeigen -->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/prio_filter"
             android:layout_width="wrap_content"
@@ -68,12 +72,15 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <!-- Ein RecyclerView wird verwendet, um eine Liste von Elementen anzuzeigen -->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/sort_bar"
         android:id="@+id/taskListRecyclerView"
         android:backgroundTint="@color/black"></androidx.recyclerview.widget.RecyclerView>
+
+    <!-- Ein ExtendedFloatingActionButton wird verwendet, um eine Schaltfläche mit erweiterten Funktionen anzuzeigen -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
