@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Ein FrameLayout wird verwendet, um eine Ansicht zu erstellen, die andere Ansichten enthält -->
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="0dp"
@@ -18,6 +19,7 @@
 
     </FrameLayout>
 
+    <!-- Ein BottomNavigationView wird verwendet, um eine Navigationsleiste am unteren Rand des Bildschirms anzuzeigen -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"

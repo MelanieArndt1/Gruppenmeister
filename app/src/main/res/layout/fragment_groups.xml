@@ -8,6 +8,7 @@
     android:foregroundTint="#673AB7"
     tools:context=".groups.Groups">
 
+    <!-- Ein ExtendedFloatingActionButton wird verwendet, um eine Schaltfläche mit erweiterten Funktionen anzuzeigen -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/alphaSort"
         android:layout_width="wrap_content"
@@ -22,6 +23,7 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
+    <!-- Ein RecyclerView wird verwendet, um eine Liste von Elementen anzuzeigen -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupListRecyclerView"
         android:layout_width="match_parent"
@@ -29,6 +31,7 @@
         android:layout_below="@id/alphaSort"
         android:backgroundTint="@color/black"></androidx.recyclerview.widget.RecyclerView>
 
+    <!-- Ein ExtendedFloatingActionButton wird verwendet, um eine Schaltfläche mit erweiterten Funktionen anzuzeigen -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/newGroupButton"
         android:layout_width="wrap_content"
