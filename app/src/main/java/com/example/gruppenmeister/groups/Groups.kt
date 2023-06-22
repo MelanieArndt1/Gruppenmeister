@@ -1,8 +1,6 @@
 package com.example.gruppenmeister.groups
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,37 +8,38 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.gruppenmeister.GroupMasterApplication
 import com.example.gruppenmeister.R
 import com.example.gruppenmeister.databinding.FragmentGroupsBinding
 
+// Die Klasse Groups erbt von Fragment und implementiert die GroupItemClickListener-Schnittstelle
 class Groups : Fragment(), GroupItemClickListener {
-    // TODO: Rename and change types of parameters
+
+    // Die Variable binding enthält eine Instanz der Klasse FragmentGroupsBinding
     private lateinit var binding: FragmentGroupsBinding
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: GroupAdapter
 
-
-
-
+    // Die Variable groupViewModel enthält eine Instanz der Klasse GroupViewModel
     private val groupViewModel: GroupViewModel by viewModels {
         val activity= requireActivity()
         GroupItemModelFactory((activity.application as GroupMasterApplication).groupRepository)
     }
+
+    // Die Methode onViewCreated() wird verwendet, um die Ansicht zu erstellen und den OnClickListener für das Symbol "alphaSort" festzulegen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Die Variablen start und isSorted werden initialisiert
         var start = true
         var isSorted = false
+
+        // Der OnClickListener für das Symbol "alphaSort" wird festgelegt
         binding.alphaSort.setOnClickListener {
             groupViewModel.gruppen.observe(viewLifecycleOwner) { original ->
                 var origin = original
                 var list = original.toMutableList()
+
+                // Wenn die Liste noch nicht sortiert ist und dies der erste Klick auf das Symbol ist, wird die Liste alphabetisch sortiert
                 if(isSorted == false && start == true) {
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
                     list.toList()
@@ -48,6 +47,8 @@ class Groups : Fragment(), GroupItemClickListener {
                     isSorted = true
                     binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
+
+                    // Wenn die Liste bereits sortiert ist und dies der erste Klick auf das Symbol ist, wird die Liste alphabetisch sortiert und umgekehrt
                 }else if(isSorted == true && start == true){
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
                     list.reverse()
@@ -57,6 +58,8 @@ class Groups : Fragment(), GroupItemClickListener {
                     start = false
                     binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
+
+                    // Wenn dies nicht der erste Klick auf das Symbol ist, wird die ursprüngliche Liste angezeigt
                 }else if(start == false){
                     groupViewModel.showGruppen.value = origin
                     start = true
@@ -66,7 +69,8 @@ class Groups : Fragment(), GroupItemClickListener {
             }
             updateRecyclerView()
         }
-
+        
+        // Der OnClickListener für das Symbol "newGroupButton" wird festgelegt und die Methode setRecyclerView() wird aufgerufen
         binding.newGroupButton.setOnClickListener{
                 val newGroupSheet = NewGroupSheet(null)
             newGroupSheet.show(childFragmentManager,"newGroupTag")
@@ -74,6 +78,7 @@ class Groups : Fragment(), GroupItemClickListener {
         setRecyclerView()
     }
 
+    // Die Methode onCreateView() wird verwendet, um die Ansicht für das Fragment zu erstellen
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,6 +87,7 @@ class Groups : Fragment(), GroupItemClickListener {
         return binding.root
     }
 
+    // Die Methode setRecyclerView() wird verwendet, um den RecyclerView für die Gruppenliste festzulegen
     fun setRecyclerView(){
         val activity= requireActivity()
         groupViewModel.gruppen.observe(viewLifecycleOwner){
@@ -92,6 +98,7 @@ class Groups : Fragment(), GroupItemClickListener {
         }
     }
 
+    // Die Methode updateRecyclerView() wird verwendet, um den RecyclerView für die gefilterte Gruppenliste festzulegen
     fun updateRecyclerView(){
         val activity= requireActivity()
         groupViewModel.showGruppen.observe(viewLifecycleOwner){
@@ -102,6 +109,7 @@ class Groups : Fragment(), GroupItemClickListener {
         }
     }
 
+    // Die Methode editGroupItem() wird verwendet, um ein Dialogfragment zum Bearbeiten einer Gruppe anzuzeigen
     override fun editGroupItem(groupItem: GroupItem) {
         NewGroupSheet(groupItem).show(childFragmentManager,"newGroupTag")
     }
