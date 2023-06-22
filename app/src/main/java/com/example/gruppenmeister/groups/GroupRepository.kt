@@ -3,6 +3,7 @@ package com.example.gruppenmeister.groups
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
 
+//Repository Klasse, die die Objekte aus der App an das Dao Interface liefern
 class GroupRepository(private val groupDao: GroupDao)
 {
     val allGroupItems: Flow<List<GroupItem>> = groupDao.allGroupItems()

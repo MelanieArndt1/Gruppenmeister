@@ -69,7 +69,7 @@ class Groups : Fragment(), GroupItemClickListener {
             }
             updateRecyclerView()
         }
-        
+
         // Der OnClickListener für das Symbol "newGroupButton" wird festgelegt und die Methode setRecyclerView() wird aufgerufen
         binding.newGroupButton.setOnClickListener{
                 val newGroupSheet = NewGroupSheet(null)
