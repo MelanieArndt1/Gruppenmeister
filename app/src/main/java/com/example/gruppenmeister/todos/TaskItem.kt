@@ -30,6 +30,7 @@ data class TaskItem(
 
     ) {
 
+    //funtkionen zum setzen der Werte in der View
     fun taskDue():LocalDate? = if(taskDueString == null) null else LocalDate.parse(taskDueString, dateFormatter)
     fun checkImageRessource(): Int = if(isCompleted) R.drawable.baseline_check_box_24 else R.drawable.baseline_check_box_outline_blank_24
     fun checkImageColor(context: Context):Int = if (isCompleted) purple(context) else black(context)
