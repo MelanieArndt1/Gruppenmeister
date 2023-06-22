@@ -15,7 +15,7 @@ import com.example.gruppenmeister.databinding.FragmentTodoDetailBinding
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Calendar
 
-//Klasse für die Logik hinter der Todo-Detailansicht
+//Klasse für die Logik hinter der Task-Detailansicht
 class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
     private lateinit var binding: FragmentTodoDetailBinding
     private val taskViewModel: TaskViewModel by viewModels {
@@ -26,7 +26,7 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
     //Funktion die während der Erstellung der View ausgeführt wird
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Falls das ToDo-Objekt existiert werden dessen werte dem XMLLayout übergeben
+        //Falls das Task-Objekt existiert werden dessen werte dem XMLLayout übergeben
         if(taskItem != null) {
             val editable = Editable.Factory.getInstance()
             binding.Name.text = editable.newEditable("Name: \n"+ taskItem!!.taskName)
@@ -41,6 +41,7 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
                 binding.calendarView.date = Calendar.getInstance().apply { set(year, monthOfYear, day)}.timeInMillis
             }
         }
+        //Hier wird festgelegt, was passiert, wenn ein Button angeklickt wird
         binding.moreIcon.setOnClickListener{
             moreAction()
         }
@@ -50,7 +51,7 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
         }
     }
 
-    //Funktion für das öffnen des Popupmenüs und das weiterleiten zu anderen Activitys oder Fragments
+    //Funktion für das öffnen des Popupmenüs und das weiterleiten zu anderen Fragments und ggf. öffnen eines Bearbeitungsdialogs
     private fun moreAction() {
         val popup = PopupMenu(requireContext(), binding.moreIcon)
         popup.menuInflater.inflate(R.menu.more_item_actions_menu ,popup.menu)
@@ -72,16 +73,18 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
         popup.show()
     }
 
-    //Funktion zum Navigieren zwischen den Fragments
+    //Funktion zum Zurück-Navigieren in die Gesamtübersicht der Tasks
     private fun backAction() {
         val fragment = Tasks()
         (requireActivity() as MainActivity).replaceFragment(fragment)
     }
 
+    //Funktion die vor der Erstellung der View ausgeführt wird
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // hier wird das Binding vom XML-Layout gesetzt, wodurch man auf alle Views innerhalb des XMl-Layout per Id zugreifen kann.
         binding = FragmentTodoDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
