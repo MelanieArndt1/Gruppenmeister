@@ -27,12 +27,12 @@ class Tasks : Fragment(), TaskItemClickListener {
         TaskItemModelFactory((activity.application as GroupMasterApplication).taskRepository)
     }
 
-    // Funktion zum Setzen des Sortier-Buttons und Sortieren der Tasksliste nach dem Namen und dem Datum der Tasks, sowie Filtern nach Prio
+    // Funktion zum Setzen des Sortier-Buttons und Sortieren der Tasksliste anhand des Namens und des Datums der Tasks, sowie Filtern nach Priorisierung
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Variablen für das Sortieren der Tasksliste
-        var start = true
+        // Variablen für das Sortieren der Tasksliste werden initialisiert
+        var toBeSorted = true
         var isSorted = false
 
         // OnClickListener für den Sortier-Button
@@ -41,8 +41,9 @@ class Tasks : Fragment(), TaskItemClickListener {
                 var origin = original
                 var list = original.toMutableList()
 
-                // Sortieren der Tasksliste nach dem Namen der Tasks (aufsteigend)
-                if(isSorted == false && start == true) {
+                // Sortieren der Tasksliste anhand des Namens der Tasks (aufsteigend), wenn die Liste noch nicht sortiert ist
+                // Darstellung des Buttons wird geändert, um Aktivierung sichtbar zu machen
+                if(isSorted == false && toBeSorted == true) {
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.taskName }))
                     list.toList()
                     taskViewModel.showTasks.value = list
@@ -50,21 +51,23 @@ class Tasks : Fragment(), TaskItemClickListener {
                     binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
 
-                    // Sortieren der Tasksliste nach dem Namen der Tasks (absteigend)
-                }else if(isSorted == true && start == true){
+                    // Sortieren der Tasksliste anhand des Namens der Tasks (absteigend), wenn die Liste schon (aufsteigend) sortiert ist
+                    // Darstellung des Buttons bleibt geändert, um Aktivierung sichtbar zu machen
+                }else if(isSorted == true && toBeSorted == true){
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.taskName }))
                     list.reverse()
                     list.toList()
                     taskViewModel.showTasks.value = list
                     isSorted = false
-                    start = false
+                    toBeSorted = false
                     binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
 
                     // Zurücksetzen der Tasksliste auf die ursprüngliche Reihenfolge
-                }else if(start == false){
+                    // Darstellungs des Buttons wird auf ursprüngliche Darstellung zurückgesetzt, um Deaktivierung sichtbar zu machen
+                }else if(toBeSorted == false){
                     taskViewModel.showTasks.value = origin
-                    start = true
+                    toBeSorted = true
                     binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
                     binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
                 }
@@ -72,19 +75,20 @@ class Tasks : Fragment(), TaskItemClickListener {
             updateRecyclerView()
         }
 
-        // Variablen für das Sortieren der Tasksliste
+        // Variablen für das Sortieren der Tasksliste werden initialisiert
         var isDateSorted = false
-        var startDate = true
+        var toBeSortedDate = true
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-        // OnClickListener für den Sortier-Button nach dem Datum der Tasks
+        // OnClickListener für den Sortier-Button anhand des Datums der Tasks
         binding.dateSort.setOnClickListener {
             taskViewModel.tasks.observe(viewLifecycleOwner) { original ->
                 var origin = original
                 var list = original.toMutableList()
 
-                // Sortieren der Tasksliste nach dem Datum der Tasks (aufsteigend)
-                if(isDateSorted == false && startDate == true) {
+                // Sortieren der Tasksliste anhand des Datums der Tasks (aufsteigend), wenn die Liste noch nicht sortiert ist
+                // Darstellung des Buttons wird geändert, um Aktivierung sichtbar zu machen
+                if(isDateSorted == false && toBeSortedDate == true) {
                     list.sortBy {dateFormat.parse(it.taskDueString)}
                     list.toList()
                     taskViewModel.showTasks.value = list
@@ -92,28 +96,31 @@ class Tasks : Fragment(), TaskItemClickListener {
                     binding.dateSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.dateSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
 
-                    // Sortieren der Tasksliste nach dem Datum der Tasks (absteigend)
-                }else if(isDateSorted == true && start == true){
+                    // Sortieren der Tasksliste anhand des Datums der Tasks (absteigend), wenn die Liste schon (aufsteigend) sortiert ist
+                    // Darstellung des Buttons bleibt geändert, um Aktivierung sichtbar zu machen
+                }else if(isDateSorted == true && toBeSorted == true){
                     list.sortBy {dateFormat.parse(it.taskDueString)}
                     list.reverse()
                     list.toList()
                     taskViewModel.showTasks.value = list
                     isDateSorted = false
-                    startDate = false
+                    toBeSortedDate = false
                     binding.dateSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.dateSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
 
-                    // Zurücksetzen der Tasksliste auf die ursprüngliche Reihenfolge
-                }else if(startDate == false){
+                    // Zurücksetzen der Tasksliste auf die ursprüngliche Reihenfolge, um die Liste neu sortieren zu können
+                    // Darstellungs des Buttons wird auf ursprüngliche Darstellung zurückgesetzt, um Deaktivierung sichtbar zu machen
+                }else if(toBeSortedDate == false){
                     taskViewModel.showTasks.value = origin
-                    startDate = true
+                    toBeSortedDate = true
                     binding.dateSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
                     binding.dateSort.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
 
                     // Zurücksetzen der Tasksliste auf die ursprüngliche Reihenfolge
+                    // Darstellungs des Buttons wird auf ursprüngliche Darstellung zurückgesetzt, um Deaktivierung sichtbar zu machen
                 }else{
                     taskViewModel.showTasks.value = origin
-                    start = true
+                    toBeSorted = true
                     isDateSorted = false
                     binding.dateSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
                     binding.dateSort.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
@@ -122,16 +129,17 @@ class Tasks : Fragment(), TaskItemClickListener {
             updateRecyclerView()
         }
 
-        // Variablen für das Filtern der Tasksliste
+        // Variable für das Filtern der Tasksliste wird initialisiert
         var isFiltered = false
 
-        // OnClickListener für den Filter-Button nach der Priorität der Tasks (nur Priorität 1)
+        // OnClickListener für den Filter-Button anhand der Priorität der Tasks (nur Priorität 1)
         binding.prioFilter.setOnClickListener{
             taskViewModel.tasks.observe(viewLifecycleOwner) { original ->
                 var list = original.toMutableList()
                 var copy = original
 
                 // Filtern der Tasksliste nach Priorität 1 (höchste Priorität)
+                // Darstellung des Buttons wird geändert, um Aktivierung sichtbar zu machen
                 if(isFiltered == false){
                     var filteredList = list.filter {it.taskPrio == 1}
                     filteredList.toList()
@@ -140,7 +148,8 @@ class Tasks : Fragment(), TaskItemClickListener {
                     binding.prioFilter.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.prioFilter.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
 
-                    // Zurücksetzen der Tasksliste auf die ursprüngliche Reihenfolge
+                    // Zurücksetzen der Tasksliste auf ohne Verwendung des Filters
+                    // Darstellungs des Buttons wird auf ursprüngliche Darstellung zurückgesetzt, um Deaktivierung sichtbar zu machen
                 }else{
                     taskViewModel.showTasks.value = list
                     isFiltered = false
@@ -152,6 +161,7 @@ class Tasks : Fragment(), TaskItemClickListener {
             updateRecyclerView()
         }
 
+        // Der OnClickListener für den Button "newTaskButton" wird festgelegt und die Methode setRecyclerView() wird aufgerufen
         binding.newTaskButton.setOnClickListener{
             val newGroupSheet = NewTaskSheet(null)
             newGroupSheet.show(childFragmentManager,"newGroupTag")
@@ -179,7 +189,7 @@ class Tasks : Fragment(), TaskItemClickListener {
         }
     }
 
-    // Funktion zum Aktualisieren des RecyclerViews mit den angezeigten Tasks (wird beim Filtern aufgerufen)
+    // Funktion zum Aktualisieren des RecyclerViews mit den angezeigten Tasks (wird beim Sortieren und Filtern aufgerufen)
     fun updateRecyclerView(){
         val activity= requireActivity()
         taskViewModel.showTasks.observe(viewLifecycleOwner){

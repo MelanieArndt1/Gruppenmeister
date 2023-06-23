@@ -23,10 +23,10 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
         TaskItemModelFactory((activity.application as GroupMasterApplication).taskRepository)
     }
 
-    //Funktion die während der Erstellung der View ausgeführt wird
+    //Funktion, die während der Erstellung der View ausgeführt wird
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Falls das Task-Objekt existiert werden dessen werte dem XMLLayout übergeben
+        //Falls das Task-Objekt existiert werden dessen Werte dem XML-Layout übergeben
         if(taskItem != null) {
             val editable = Editable.Factory.getInstance()
             binding.Name.text = editable.newEditable("Name: \n"+ taskItem!!.taskName)
@@ -51,7 +51,7 @@ class ToDoDetail(var taskItem: TaskItem) : DialogFragment() {
         }
     }
 
-    //Funktion für das öffnen des Popupmenüs und das weiterleiten zu anderen Fragments und ggf. öffnen eines Bearbeitungsdialogs
+    //Funktion für das Öffnen des Popupmenüs und das Weiterleiten zu anderen Fragments und ggf. Öffnen eines Bearbeitungsdialogs
     private fun moreAction() {
         val popup = PopupMenu(requireContext(), binding.moreIcon)
         popup.menuInflater.inflate(R.menu.more_item_actions_menu ,popup.menu)

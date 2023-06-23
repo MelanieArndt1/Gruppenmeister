@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.gruppenmeister.groups.GroupRepository
 import com.example.gruppenmeister.todos.TaskRepository
 
-//Klasse zum initalisieren der Datenbank und der Repositorys
+//Klasse zum Initalisieren der Datenbank und der Repositorys
 class GroupMasterApplication: Application()
 {
     private val database by lazy { GruppenmeisterDatabase.getDatabase(this)}

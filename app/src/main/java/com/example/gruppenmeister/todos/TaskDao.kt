@@ -2,7 +2,7 @@ package com.example.gruppenmeister.todos
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-//Dao interface von Room für die CRUD Schicht
+//Dao Interface von Room für die CRUD-Schicht
 @Dao
 interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

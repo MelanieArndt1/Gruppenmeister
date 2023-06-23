@@ -25,22 +25,23 @@ class Groups : Fragment(), GroupItemClickListener {
         GroupItemModelFactory((activity.application as GroupMasterApplication).groupRepository)
     }
 
-    // Die Methode onViewCreated() wird verwendet, um die Ansicht zu erstellen und den OnClickListener für das Symbol "alphaSort" festzulegen
+    // Die Methode onViewCreated() wird verwendet, um die Ansicht zu erstellen und den OnClickListener für den Button "alphaSort" festzulegen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Die Variablen start und isSorted werden initialisiert
-        var start = true
+        // Die Variablen toBeSorted und isSorted werden initialisiert
+        var toBeSorted = true
         var isSorted = false
 
-        // Der OnClickListener für das Symbol "alphaSort" wird festgelegt
+        // Der OnClickListener für den Button "alphaSort" wird festgelegt
         binding.alphaSort.setOnClickListener {
             groupViewModel.gruppen.observe(viewLifecycleOwner) { original ->
                 var origin = original
                 var list = original.toMutableList()
 
-                // Wenn die Liste noch nicht sortiert ist und dies der erste Klick auf das Symbol ist, wird die Liste alphabetisch sortiert
-                if(isSorted == false && start == true) {
+                // Wenn die Liste noch nicht sortiert ist und soritert werden soll, wird die Liste alphabetisch sortiert
+                // Darstellung des Buttons wird geändert, um Aktivierung sichtbar zu machen
+                if(isSorted == false && toBeSorted == true) {
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
                     list.toList()
                     groupViewModel.showGruppen.value = list
@@ -48,21 +49,23 @@ class Groups : Fragment(), GroupItemClickListener {
                     binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
 
-                    // Wenn die Liste bereits sortiert ist und dies der erste Klick auf das Symbol ist, wird die Liste alphabetisch sortiert und umgekehrt
-                }else if(isSorted == true && start == true){
+                    // Wenn die Liste bereits sortiert ist und umsortiert werden soll, wird die Liste alphabetisch umgekehrt sortiert
+                    // Darstellung des Buttons bleibt geändert, um Aktivierung sichtbar zu machen
+                }else if(isSorted == true && toBeSorted == true){
                     list.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.groupName }))
                     list.reverse()
                     list.toList()
                     groupViewModel.showGruppen.value = list
                     isSorted = false
-                    start = false
+                    toBeSorted = false
                     binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
 
-                    // Wenn dies nicht der erste Klick auf das Symbol ist, wird die ursprüngliche Liste angezeigt
-                }else if(start == false){
+                    // Wenn die Liste nicht weiter sortiert werden soll, wird die ursprüngliche Liste angezeigt
+                    // Darstellungs des Buttons wird auf ursprüngliche Darstellung zurückgesetzt, um Deaktivierung sichtbar zu machen
+                }else if(toBeSorted == false){
                     groupViewModel.showGruppen.value = origin
-                    start = true
+                    toBeSorted = true
                     binding.alphaSort.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
                     binding.alphaSort.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
                 }
@@ -70,7 +73,7 @@ class Groups : Fragment(), GroupItemClickListener {
             updateRecyclerView()
         }
 
-        // Der OnClickListener für das Symbol "newGroupButton" wird festgelegt und die Methode setRecyclerView() wird aufgerufen
+        // Der OnClickListener für den Button "newGroupButton" wird festgelegt und die Methode setRecyclerView() wird aufgerufen
         binding.newGroupButton.setOnClickListener{
                 val newGroupSheet = NewGroupSheet(null)
             newGroupSheet.show(childFragmentManager,"newGroupTag")
@@ -114,6 +117,7 @@ class Groups : Fragment(), GroupItemClickListener {
         NewGroupSheet(groupItem).show(childFragmentManager,"newGroupTag")
     }
 
+    // Die Methode moreAction() wird verwendet, um ein Menü-Fenster zur Auswahl von Bearbeiten oder Löschen anzuzeigen und die entsprechende Funktion auszuwählen
     override fun moreAction(groupItem: GroupItem, view: View) {
         val popup = PopupMenu(requireContext(), view)
         popup.menuInflater.inflate(R.menu.more_item_actions_menu ,popup.menu)

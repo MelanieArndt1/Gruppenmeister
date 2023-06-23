@@ -16,12 +16,18 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 
 
+// Die Klasse NewTaskSheet erbt von DialogFragment
 class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
+    // Das binding-Objekt wird verwendet, um auf die Ansichten in der Layout-Datei zuzugreifen
     private lateinit var binding: FragmentNewTaskSheetBinding
+
+    // Das taskViewModel-Objekt wird verwendet, um auf die Datenbank zuzugreifen
     private val taskViewModel: TaskViewModel by viewModels {
         val activity= requireActivity()
         TaskItemModelFactory((activity.application as GroupMasterApplication).taskRepository)
     }
+
+    // Variablen für Anlegen einer Task werden initialisiert
     private var dueDate: LocalDate? = null
     private var prio: Int = 0
     private val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MMMM/yy")
@@ -55,7 +61,7 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
             openDatePicker()
         }
 
-        // OnCheckedChangeListener für dieSwitch-Material komponente
+        // OnCheckedChangeListener für die Switch-Material-Komponente
         binding.prioSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             run {
                 if (isChecked) {
@@ -90,7 +96,7 @@ class NewTaskSheet(var taskItem: TaskItem?): DialogFragment() {
         binding.datePickerButton.text = dateFormatter.format(dueDate)
     }
 
-    // Diese Methode erstellt die View
+    // Diese Methode erstellt die View.
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

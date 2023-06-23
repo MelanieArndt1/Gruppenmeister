@@ -15,7 +15,7 @@ class GroupViewModel(private val repository: GroupRepository): ViewModel() {
     // Die Variable gruppen enthält alle Gruppen in der Datenbank
     var gruppen: LiveData<List<GroupItem>> = repository.allGroupItems.asLiveData()
 
-    // Die Variable showGruppen wird verwendet, um eine gefilterte Liste von Gruppen anzuzeigen
+    // Die Variable showGruppen wird verwendet, um eine sortierte oder gefilterte Liste von Gruppen anzuzeigen
     var showGruppen: MutableLiveData<List<GroupItem>> = MutableLiveData<List<GroupItem>>()
 
     // Die Methode addGroup() fügt eine neue Gruppe zur Datenbank hinzu

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 
-//Viewmodel Klasse mit funktionen, die die Objekte der App an das Repository übergeben
+//Viewmodel-Klasse mit Funktionen, die die Objekte der App an das Repository übergeben
 class TaskViewModel(private val repository: TaskRepository): ViewModel() {
 
     // LiveData-Objekt für die Liste aller Tasks
@@ -19,7 +19,7 @@ class TaskViewModel(private val repository: TaskRepository): ViewModel() {
     // MutableLiveData-Objekt für die Liste der anzuzeigenden Tasks
     var showTasks: MutableLiveData<List<TaskItem>> = MutableLiveData<List<TaskItem>>()
 
-    // Funktion zum Hinzufügen einer neuen Task zur Datenbank
+    // Funktion zum Hinzufügen einer neuen Task in die Datenbank
     fun addTask(newTask: TaskItem) = viewModelScope.launch {
         repository.insertTaskItem(newTask)
     }
