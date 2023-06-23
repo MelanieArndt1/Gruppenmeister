@@ -12,48 +12,44 @@
         android:id="@+id/sort_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="-6dp"
         android:foregroundTint="#673AB7">
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/alphaSort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="3dp"
+            android:layout_weight="0"
             android:backgroundTint="#00673AB7"
             android:drawableEnd="@drawable/baseline_sort_by_alpha_24"
+            android:drawablePadding="0dp"
             android:drawableTintMode="add"
-            android:text="Aufgabe"
+            android:text="Task"
             android:textAllCaps="false"
             android:textColor="@color/purple_200"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/date_sort"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/date_sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="0dp"
             android:backgroundTint="#00FFFFFF"
             android:drawableEnd="@drawable/baseline_compare_arrows_24"
+            android:drawablePadding="0dp"
             android:drawableTintMode="add"
-            android:text="Datum"
+            android:text="Fälligkeit"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/purple_200"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.08"
-            app:layout_constraintStart_toEndOf="@+id/alpha_sort"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/prio_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:drawableTintMode="add"
             android:text="Wichtigkeit"
@@ -61,11 +57,8 @@
             android:textAllCaps="false"
             android:textColor="@color/purple_200"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.08"
-            app:layout_constraintStart_toEndOf="@+id/alpha_sort"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView

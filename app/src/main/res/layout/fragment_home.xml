@@ -16,7 +16,7 @@
         <View
             android:id="@+id/top_view_home"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="75dp"
             android:background="@drawable/bg_view_home"/>
 
         <!-- App Title -->
@@ -37,8 +37,8 @@
             android:layout_height="match_parent"
             android:rowCount="5"
             android:columnCount="2"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/top_view_home">
 
